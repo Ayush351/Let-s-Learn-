@@ -9,39 +9,40 @@ using namespace std;
 
 #define p(i,n,vect) for(int i=0;i<(int)n;++i) {cout<<vect[i]<<" ";} cout<<"\n";
 
-void mergeOverlapping(vector<vector<int> >&arr)
-{
-    vector<vector<int> >ans;
-    sort(arr.begin(), arr.end());
-    for (int i = 0; i < (int)arr.size(); i++)
-    { 
-        if(ans.empty() ||  arr[i][0] > ans.back()[1])
-        {
-            ans.push_back(arr[i]);
-        }
-        else
-        {
-            ans.back()[1] = max(ans.back()[1],arr[i][1]);
+void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+        
+        while (j >= 0) {
+            if (i >= 0 && nums1[i] > nums2[j]) {
+                nums1[k--] = nums1[i--];
+            } else {
+                nums1[k--] = nums2[j--];
+            }
+            for(auto &v : nums1)
+            {
+                cout<<v<<" ";
+            }
+            cout<<"\n";
         }
     }
-    for(auto& it : ans)
-    {
-        cout<<it[0]<<" "<<it[1]<<endl;
-    }
-}
 void solve()
 {
     int N,M;
     cin>>N>>M;
-    vector<vector<int> >arr(N,vector<int>(M));
-    for(int i=0;i<N;i++)
+    vector<int> nums1(N),nums2(M);
+    for(int  i= 0;i<N;i++)
     {
-        for(int j=0;j<M;j++)
-        {
-            cin>>arr[i][j];
-        }
+        cin >>nums1[i];
     }
-    mergeOverlapping(arr);
+    for(int i=0;i<M;i++){
+        cin >>nums2[i];
+    }
+    merge(nums1,N-M,nums2,M);
+    // for(auto it : nums1){
+    //     cout<<it<<" ";
+    // }
 }
 signed main()
 {
