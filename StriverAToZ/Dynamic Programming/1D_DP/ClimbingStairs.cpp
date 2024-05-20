@@ -43,8 +43,6 @@ int tabu(int ind,vector<int>&dp)
 
 int space_opti(int N)
 {
-    if(N  <= 1)
-    return 1;
 
     int prev1 = 1;
     int prev2 = 1;
